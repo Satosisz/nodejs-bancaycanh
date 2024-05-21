@@ -24,10 +24,10 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `categories`
+-- Table structure for table `category`
 --
 
-CREATE TABLE `categories` (
+CREATE TABLE `category` (
   `id` int(10) UNSIGNED NOT NULL,
   `c_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `description` varchar(255) DEFAULT NULL,
@@ -40,10 +40,10 @@ CREATE TABLE `categories` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ROW_FORMAT=DYNAMIC;
 
 --
--- Dumping data for table `categories`
+-- Dumping data for table `category`
 --
 
-INSERT INTO `categories` (`id`, `c_name`, `description`, `avatar`, `c_slug`, `status`, `hot`, `created_at`, `updated_at`) VALUES
+INSERT INTO `category` (`id`, `c_name`, `description`, `avatar`, `c_slug`, `status`, `hot`, `created_at`, `updated_at`) VALUES
 (1, 'Trái cây', 'Trái cây', 'image-98b94d67-c2f1-4261-9963-def91a17eec3.png', 'trai-cay', 1, -1, '2023-11-30 22:58:09', '2023-12-03 23:02:35'),
 (2, 'Rau củ tươi', 'Rau củ tươi', 'image-1cfe6a99-4763-470e-af3d-6f0eb7432679.png', 'rau-cu-tuoi', 1, -1, '2023-11-30 22:58:29', '2023-12-03 23:02:50'),
 (3, 'Đồ uống', 'Đồ uống', 'image-3d22b186-fb77-4407-be24-e58df23af63f.jpg', 'do-uong', 1, -1, '2023-11-30 22:58:42', '2024-05-03 01:42:25');
@@ -489,9 +489,9 @@ INSERT INTO `user_roles` (`id`, `role_id`, `user_id`, `created_at`, `updated_at`
 --
 
 --
--- Indexes for table `categories`
+-- Indexes for table `category`
 --
-ALTER TABLE `categories`
+ALTER TABLE `category`
   ADD PRIMARY KEY (`id`) USING BTREE;
 
 --
@@ -574,9 +574,9 @@ ALTER TABLE `user_roles`
 --
 
 --
--- AUTO_INCREMENT for table `categories`
+-- AUTO_INCREMENT for table `category`
 --
-ALTER TABLE `categories`
+ALTER TABLE `category`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
