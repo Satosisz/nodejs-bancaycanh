@@ -7,7 +7,7 @@ import {
 } from 'typeorm';
 import { Products } from './product.entity';
 
-@Entity('categories', { schema: 'public' })
+@Entity('category', { schema: 'public' })
 export class Category {
 	@PrimaryGeneratedColumn('increment',{name: "id"})
 	id: number;
