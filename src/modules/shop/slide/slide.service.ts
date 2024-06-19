@@ -21,7 +21,7 @@ export class SlideService {
             where: conditions,
             order: { created_at: 'DESC' },
             take: paging.pageSize,
-            skip: ((paging.page - 1) * paging.pageSize)
+            skip: paging.page * paging.pageSize
         });
 
         slides.forEach(element => {

@@ -50,7 +50,7 @@ export class ProductService {
 				category: true
 			},
 			take: paging.pageSize,
-			skip: ((paging.page - 1) * paging.pageSize)
+			skip: paging.page * paging.pageSize
 		});
 		products.forEach(element => {
 			element.pro_avatar = process.env.BACKEND_APP_URL + "/api/upload/" + element.pro_avatar

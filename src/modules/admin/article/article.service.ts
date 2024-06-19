@@ -25,7 +25,7 @@ export class ArticleService {
                 // user: true
             },
             take: paging.pageSize,
-            skip: ((paging.page - 1) * paging.pageSize)
+            skip: paging.page * paging.pageSize
         });
 
         return { articles: articles, pageable: new Paging(paging.page, paging.pageSize, total), totalElements: total }

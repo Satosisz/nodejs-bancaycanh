@@ -30,7 +30,7 @@ export class ContactController {
 	async findAll(@Request() req: any) {
 		try {
 			let paging: IPaging = {
-				page: req.query.page || 1,
+				page: req.query.page || 0,
 				pageSize: req.query.pageSize || 20,
 			};
 			let filter = {

@@ -21,7 +21,7 @@ export class MenuService {
             where: conditions,
             order: { created_at: 'DESC' },
             take: paging.pageSize,
-            skip: ((paging.page - 1) * paging.pageSize)
+            skip: paging.page * paging.pageSize
         });
 
         return { menus: menus, pageable: new Paging(paging.page, paging.pageSize, total), totalElements: total }

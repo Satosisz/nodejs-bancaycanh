@@ -21,7 +21,7 @@ export class SlideController {
         try {
             const filters = await this.buildFilter(req);
             const paging: IPaging = {
-                page: req.query.page || 1,
+                page: req.query.page || 0,
                 pageSize: req.query.pageSize || 20
             };
             let slides: any = await this.slideService.getSlides(paging, filters, req);

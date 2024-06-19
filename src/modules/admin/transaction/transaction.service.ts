@@ -104,7 +104,7 @@ export class TransactionService {
 				orders: true
 			},
 			take: paging.pageSize,
-			skip: ((paging.page - 1) * paging.pageSize)
+			skip: paging.page * paging.pageSize
 		});
 		return { orders: orders, pageable: new Paging(paging.page, paging.pageSize, total), totalElements: total };
 	}

@@ -15,20 +15,11 @@ export class Category {
 	@Column({ name: 'c_name', length: 255 })
 	c_name: string | null;
 
-	@Column({ name: 'description', length: 255, nullable: true })
-	description: string | null;
-
-	@Column({ name: 'avatar', nullable: true })
-	avatar: string | null;
-
 	@Column({ name: 'c_slug', nullable: false })
 	c_slug: string | null;
 
-	@Column('smallint', { name: 'status', nullable: false, default: 0 })
-	status: number | -1;
-
-	@Column('smallint', { name: 'hot', nullable: false, default: 0 })
-	hot: number | -1;
+	@Column({ name: 'c_cate', nullable: false })
+	c_cate: string | null;
 
 	@Column('timestamp', {
 		name: 'created_at',

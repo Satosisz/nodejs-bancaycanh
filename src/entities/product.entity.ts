@@ -42,9 +42,6 @@ export class Products {
 	@Column('bigint', { name: 'pro_category', nullable: false })
 	pro_category: number;
 
-	@Column('json', { name: 'options', nullable: false })
-	options: any;
-
 	@Column('float', { name: 'pro_price', nullable: false, default: 0 })
 	pro_price: number;
 
@@ -60,8 +57,8 @@ export class Products {
 	@Column('smallint', { name: 'pro_sale', nullable: false, default: 0 })
 	pro_sale: number;
 
-	@Column('bigint', { name: 'user_id', nullable: false, default: 0 })
-	user_id: number;
+	@Column('bigint', { name: 'pro_admin_id', nullable: false, default: 0 })
+	pro_admin_id: number;
 
 
 	@Column('timestamp', {

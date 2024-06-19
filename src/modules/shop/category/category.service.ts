@@ -23,16 +23,12 @@ export class CategoryService {
             take: paging.pageSize,
             skip: (paging.page * paging.pageSize),
         });
-        categories.forEach(element => {
-			element.avatar = process.env.BACKEND_APP_URL + "/api/upload/" + element.avatar
-		});
 
         return { content: categories, pageable: new Paging(paging.page, paging.pageSize, total), totalElements: total };
     }
 
     async getCategoryById(cateId: number): Promise<Category> {
         var category = await this.cateRepo.findOneBy({ id: cateId });
-		category.avatar = process.env.BACKEND_APP_URL + "/api/upload/" + category.avatar
         return category;
     }
 
@@ -59,8 +55,6 @@ export class CategoryService {
 
         if (filters.id) conditions.id = filters.id;
         if (filters.c_name) conditions.c_name = ILike(`%${filters.c_name}%`);
-        if (filters.status) conditions.status = filters.status;
-        if (filters.hot) conditions.hot = filters.hot;
 
         return conditions;
     }
@@ -73,7 +67,7 @@ export class CategoryService {
             where: condition,
             order: { created_at: 'DESC' },
             take: paging.pageSize,
-            skip: ((paging.page - 1) * paging.pageSize)
+            skip: paging.page * paging.pageSize
         });
 
         return { categories: categories, pageable: new Paging(paging.page, paging.pageSize, total), totalElements: total };

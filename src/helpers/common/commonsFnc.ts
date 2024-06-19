@@ -22,3 +22,12 @@ export const makeId = (length) => {
 	}
 	return result;
 }
+
+export function pare_url_file(image, folder = '')
+{
+	if (!image) {
+		return 'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTzMcYWJkLEXnPD7zTbRwdnNRjjNPJDdP4ePQ&usqp=CAU';
+	}
+	var explode = image.split("__");
+	return process.env.BACKEND_APP_URL + "/api/upload/" + image
+}

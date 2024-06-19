@@ -15,10 +15,10 @@ export class ProductsImages {
 	id: number;
 
 	@Column()
-	name: string | null;
+	al_name: string | null;
 
 	@Column()
-	path: string | null;
+	al_slug: string | null;
 
 	@Column()
 	product_id: number;

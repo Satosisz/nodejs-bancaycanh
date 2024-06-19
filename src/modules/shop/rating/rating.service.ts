@@ -28,7 +28,7 @@ export class RatingService {
                 user: true,
                 product: true,
             },
-            skip: ((paging.page - 1) * paging.pageSize)
+            skip: paging.page * paging.pageSize
         });
 
         return { ratings: ratings, pageable: new Paging(paging.page, paging.pageSize, total), totalElements: total }

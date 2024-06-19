@@ -3,7 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import * as _ from "lodash";
 import { ProductsImages } from 'src/entities/product-image.entity';
 import { Products } from 'src/entities/product.entity';
-import { IPaging, Paging } from 'src/helpers/helper';
+import { IPaging, Paging, pare_url_file } from 'src/helpers/helper';
 import { BadRequestException } from 'src/helpers/response/badRequest';
 import { ILike, MoreThan, Repository } from 'typeorm';
 import CreateProductDto from './dtos/create-product.dto';
@@ -62,10 +62,11 @@ export class ProductService {
 				category: true
 			},
 			take: paging.pageSize,
-			skip: ((paging.page - 1) * paging.pageSize)
+			skip: paging.page * paging.pageSize
 		});
 		products.forEach(element => {
-			element.pro_avatar = process.env.BACKEND_APP_URL + "/api/upload/" + element.pro_avatar
+			
+			element.pro_avatar = pare_url_file(element.pro_avatar)
 		});
 		return { content: products, pageable: new Paging(paging.page, paging.pageSize, total), totalElements: total };
 	}

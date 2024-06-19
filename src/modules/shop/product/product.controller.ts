@@ -22,9 +22,10 @@ export class ProductController {
 	) {
 		try {
 			const paging: IPaging = {
-				page: req.query.page || 1,
+				page: req.query.page || 0,
 				pageSize: req.query.pageSize || 20
 			};
+
 			const filters = {
 				name: req.query.name || null,
 				pro_active: req.query.pro_active || null,

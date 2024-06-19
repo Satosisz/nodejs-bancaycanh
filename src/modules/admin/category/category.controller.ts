@@ -24,7 +24,7 @@ export class CategoryController {
         try {
             const filters = await this.buildFilter(req);
             const paging: IPaging = {
-                page: req.query.page || 1,
+                page: req.query.page || 0,
                 pageSize: req.query.pageSize || 20
             };
             let categories: any = await this.cateService.getCategories(paging, filters, req);
@@ -126,7 +126,7 @@ export class CategoryController {
     async getCategoriesHot(@Request() req: any) {
         try {
             const paging: IPaging = {
-                page: req.query.page || 1,
+                page: req.query.page || 0,
                 pageSize: req.query.pageSize || 10
             };
             let categories: any = await this.cateService.getCategoriesHot(paging);

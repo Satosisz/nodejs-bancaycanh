@@ -7,27 +7,11 @@ export class CreateCategoryDto {
     @IsString()
     @IsNotEmpty()
     @ApiProperty()
-    name: string;
+    c_name: string;
 
     @IsString()
     @ApiProperty()
-    description: string;
-
-    @IsString()
-    @ApiProperty()
-    avatar: string;
-
-    @IsString()
-    @ApiProperty()
-    slug: string;
-
-    @IsInt()
-    @ApiProperty()
-    status: number;
-
-    @IsInt()
-    @ApiProperty()
-    hot: number;
+    c_cate: string;
 
     created_at: Date = new Date();
     updated_at: Date = new Date();
