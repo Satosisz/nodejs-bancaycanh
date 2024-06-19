@@ -3,7 +3,6 @@ import { TransactionService } from './transaction.service';
 import { CreateTransactionDto } from './dto/create-transaction.dto';
 import { UpdateTransactionDto } from './dto/update-transaction.dto';
 import { JwtGuard } from 'src/modules/auth/guards/jwt/jwt.guard';
-import { RoleGuard } from 'src/modules/auth/guards/role/role.guard';
 import * as _ from 'lodash';
 import { BadRequestException } from 'src/helpers/response/badRequest';
 import { BaseResponse, HTTP_STATUS, IPaging } from 'src/helpers/helper';
@@ -16,7 +15,6 @@ export class TransactionController {
 	constructor(private readonly transactionService: TransactionService) { }
 
 	@Post('store')
-	@UseGuards(RoleGuard)
 	async create(@Request() req: any, @Body() createTransactionDto: CreateTransactionDto) {
 		try {
 			if(_.isEmpty(createTransactionDto)) {
@@ -33,7 +31,6 @@ export class TransactionController {
 	}
 
 	@Get('')
-	@UseGuards(RoleGuard)
 	async findAll(@Request() req: any) {
 
 
@@ -58,7 +55,6 @@ export class TransactionController {
 	}
 
 	@Get('show/:id')
-	@UseGuards(RoleGuard)
 	async findOne(@Param('id') id: string) {
 		try {
 
@@ -70,7 +66,6 @@ export class TransactionController {
 	}
 
 	@Put('update/:id')
-	@UseGuards(RoleGuard)
 	async update(@Param('id') id: string, @Body() updateTransactionDto: UpdateTransactionDto) {
 		try {
 			let transaction = await this.transactionService.findOne(Number(id));
@@ -85,7 +80,6 @@ export class TransactionController {
 	}
 
 	@Delete('delete/:id')
-	@UseGuards(RoleGuard)
 	remove(@Param('id') id: string) {
 		return this.transactionService.remove(+id);
 	}

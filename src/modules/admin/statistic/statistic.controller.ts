@@ -1,7 +1,6 @@
 import { Controller, Get, Post, Body, Patch, Param, Delete, HttpCode, HttpStatus, UseGuards, Request } from '@nestjs/common';
 import { StatisticService } from './statistic.service';
 import { ApiResponse, ApiTags } from '@nestjs/swagger';
-import { RoleGuard } from 'src/modules/auth/guards/role/role.guard';
 import { JwtGuard } from 'src/modules/auth/guards/jwt/jwt.guard';
 import { BaseResponse, HTTP_STATUS } from 'src/helpers/helper';
 

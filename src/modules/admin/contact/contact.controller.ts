@@ -1,10 +1,8 @@
 import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards, HttpCode, HttpStatus, Request, BadRequestException, Put } from '@nestjs/common';
 import { ContactService } from './contact.service';
 import { CreateContactDto } from './dto/create-contact.dto';
-import { UpdateContactDto } from './dto/update-contact.dto';
-import { ApiResponse, ApiTags } from '@nestjs/swagger';
+import { ApiTags } from '@nestjs/swagger';
 import { JwtGuard } from 'src/modules/auth/guards/jwt/jwt.guard';
-import { RoleGuard } from 'src/modules/auth/guards/role/role.guard';
 import { BaseResponse, HTTP_STATUS, IPaging } from 'src/helpers/helper';
 import * as _ from 'lodash';
 
@@ -15,7 +13,6 @@ export class ContactController {
 	constructor(private readonly contactService: ContactService) { }
 
 	@Post('store')
-	@UseGuards(RoleGuard)
 	async create(@Request() req: any, @Body() createOrderDto: CreateContactDto) {
 		try {
 			if (_.isEmpty(createOrderDto)) {
@@ -30,7 +27,6 @@ export class ContactController {
 	}
 
 	@Get('')
-	@UseGuards(RoleGuard)
 	async findAll(@Request() req: any) {
 		try {
 			let paging: IPaging = {
@@ -50,7 +46,6 @@ export class ContactController {
 	}
 
 	@Get('show/:id')
-	@UseGuards(RoleGuard)
 	async findOne(@Param('id') id: string) {
 		try {
 
@@ -62,7 +57,6 @@ export class ContactController {
 	}
 
 	@Put('update/:id')
-	@UseGuards(RoleGuard)
 	async update(@Param('id') id: string, @Body() updateOrderDto: CreateContactDto) {
 		try {
 			let order = await this.contactService.findOne(Number(id));
@@ -77,7 +71,6 @@ export class ContactController {
 	}
 
 	@Delete('delete/:id')
-	@UseGuards(RoleGuard)
 	remove(@Param('id') id: string) {
 		return this.contactService.remove(+id);
 	}

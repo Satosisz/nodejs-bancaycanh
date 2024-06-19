@@ -9,7 +9,6 @@ import {
 } from 'typeorm';
 import { Rating } from './rating.entity';
 // import { Article } from './article.entity';
-import { Role } from './role.entity';
 import { Transactions } from './transaction.entity';
 
 @Index('users_email_unique', ['email'], { unique: true })
@@ -78,11 +77,4 @@ export class User {
 	@OneToMany(() => Transactions, o => o.user)
 	transaction: Transactions[];
 
-	@ManyToMany(type => Role)
-	@JoinTable({
-		name: 'user_roles',
-		joinColumn: { name: 'user_id', referencedColumnName: 'id' },
-		inverseJoinColumn: { name: 'role_id', referencedColumnName: 'id' },
-	})
-	roles: Role[];
 }

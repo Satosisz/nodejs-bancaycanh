@@ -5,8 +5,6 @@ import { Orders } from 'src/entities/orders.entity';
 import { User } from 'src/entities/user.entity';
 import { ProductService } from '../product/product.service';
 import { ProductsImages } from 'src/entities/product-image.entity';
-import { Role } from 'src/entities/role.entity';
-import { Permission } from 'src/entities/permission.entity';
 import { UserRole } from 'src/entities/user-roles.entity';
 import { Transactions } from 'src/entities/transaction.entity';
 import { MailModule } from 'src/modules/mail/mail.module';
@@ -20,8 +18,6 @@ import { TransactionService } from './transaction.service';
 			Orders,
 			User,
 			ProductsImages,
-			Role,
-			Permission,
 			UserRole,
 			Transactions
 		]),

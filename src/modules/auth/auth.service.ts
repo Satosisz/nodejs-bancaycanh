@@ -138,9 +138,6 @@ export class AuthService {
 		data.password = await bcrypt.hash(data.password.trim(), 10);
 		const newData = await this.userRepo.create(data);
 		await this.userRepo.save(newData);
-		if (!_.isEmpty(data.roles)) {
-			await this.userService.syncRolesByUser(data.roles, newData.id);
-		}
 		return newData;
 	}
 

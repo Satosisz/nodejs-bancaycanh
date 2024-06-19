@@ -1,11 +1,10 @@
-import { Body, Controller, Get, HttpCode, Param, Post, Put, Req, UseGuards } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post, Put, Req, UseGuards } from '@nestjs/common';
 import { ApiResponse, ApiTags } from '@nestjs/swagger';
 import { UserService } from './user.service';
-import { HTTP_STATUS, IPaging, Response, BaseResponse } from 'src/helpers/helper';
+import { HTTP_STATUS, IPaging, BaseResponse } from 'src/helpers/helper';
 import UpdateUserDto from './dtos/update-user.dto';
 import CreateUserDto from './dtos/create-user.dto';
 import { JwtGuard } from 'src/modules/auth/guards/jwt/jwt.guard';
-import { RoleGuard } from 'src/modules/auth/guards/role/role.guard';
 
 @Controller('admin/user')
 @ApiTags('Admin User')
@@ -18,7 +17,6 @@ export class UserController {
     }
 
     @Get('')
-    @UseGuards(RoleGuard)
     @ApiResponse({ status: 200, description: 'success' })
     async getListsUsers(
         @Req() request: any

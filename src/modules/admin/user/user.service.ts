@@ -2,8 +2,6 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import * as bcrypt from "bcrypt";
 import * as _ from "lodash";
-import { Permission } from 'src/entities/permission.entity';
-import { Role } from 'src/entities/role.entity';
 import { UserRole } from 'src/entities/user-roles.entity';
 import { User } from 'src/entities/user.entity';
 import { IPaging, Paging, USER_CONST } from 'src/helpers/helper';
@@ -11,8 +9,6 @@ import { BadRequestException } from 'src/helpers/response/badRequest';
 import { Like, Not, Repository } from 'typeorm';
 import CreateUserDto from './dtos/create-user.dto';
 import UpdateUserDto from './dtos/update-user.dto';
-import { UserRoleDto } from './dtos/user-role.dto';
-import { UserRoleService } from './services/user-role.service';
 import { ValidateService } from './services/validate.service';
 
 @Injectable()
@@ -24,12 +20,8 @@ export class UserService {
 		'name', 'phone', 'status', 'type', 'updated_at']
 	constructor(
 		@InjectRepository(User) private readonly admUserRepo: Repository<User>,
-		@InjectRepository(Role) private readonly admRoleRepo: Repository<Role>,
-		@InjectRepository(Permission) private readonly admPermissionRepo: Repository<Permission>,
 		@InjectRepository(UserRole) private readonly admUserRoleRepo: Repository<UserRole>,
 		private readonly validateService: ValidateService,
-		private readonly userRoleService: UserRoleService,
-
 	) {
 
 	}
@@ -56,9 +48,6 @@ export class UserService {
 		const [users, total] = await this.admUserRepo.findAndCount({
 			where: condition,
 			select: [].concat(this.selectColumn),
-			relations: {
-				roles: true
-			},
 			order: {
 				created_at: 'DESC'
 			},
@@ -76,9 +65,6 @@ export class UserService {
 
 	async getByUserNameOrEmail(account: string) {
 		const user = await this.admUserRepo.findOne({
-			relations: {
-				roles: true
-			},
 			where: [
 				{ email: account },
 				{ username: account },
@@ -90,11 +76,6 @@ export class UserService {
 
 	async create(userDto: CreateUserDto) {
 		await this.validateService.validateUser(userDto, true);
-		let roles = [];
-		if (!_.isEmpty(userDto.roles)) {
-			roles = userDto.roles;
-		}
-		delete userDto.roles;
 
 		userDto.status = userDto.status || USER_CONST.USER_STATUS_ACTIVE;
 		if (!userDto.type) {
@@ -109,45 +90,22 @@ export class UserService {
 		const newUser = await this.admUserRepo.create({ ...userDto as any });
 
 		const account: any = await this.admUserRepo.save(newUser);
-		if (account && !_.isEmpty(roles)) {
-			await this.syncRolesByUser(roles, account.id);
-		}
 
 		return account;
 	}
 
 	async update(id: number, userDto: UpdateUserDto) {
 		await this.validateService.validateUser(userDto);
-		let roles: any = [];
 		if (userDto.birthday) {
 			userDto.birthday = new Date(userDto.birthday);
 		}
-		// if (!_.isEmpty(userDto.roles)) {
-		// 	roles = userDto.roles;
-
-		// }
-		// delete userDto.roles;
 
 		if (userDto.password) {
 			userDto.password = await bcrypt.hash(userDto.password.trim(), 10);
 		}
-		console.log(userDto);
 		await this.admUserRepo.update(id, userDto)
 
-		// if (!_.isEmpty(roles)) {
-		// 	await this.syncRolesByUser(roles, id);
-		// }
 		return await this.show(id);
-	}
-
-	async syncRolesByUser(roles: any, user_id: number) {
-		await this.userRoleService.deleteByUserId(user_id);
-		for (let item of roles) {
-			let userRoleDto = new UserRoleDto();
-			userRoleDto.role_id = item;
-			userRoleDto.user_id = user_id;
-			await this.admUserRoleRepo.save(userRoleDto);
-		}
 	}
 
 	async show(id: number) {
@@ -158,9 +116,6 @@ export class UserService {
 		let user = await this.admUserRepo.findOne({
 			where: {
 				id: id
-			},
-			relations: {
-				roles: true
 			},
 			select: [].concat(this.selectColumn)
 		});

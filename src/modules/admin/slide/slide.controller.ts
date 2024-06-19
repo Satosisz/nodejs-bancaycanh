@@ -1,12 +1,11 @@
 import { Controller, Get, Post, Put, Delete, Param, Body, HttpCode, HttpStatus, Request, BadRequestException, UseGuards } from '@nestjs/common';
 import { ApiResponse, ApiTags } from '@nestjs/swagger';
-import { HTTP_STATUS, IPaging, Paging, Response, BaseResponse } from 'src/helpers/helper';
+import { HTTP_STATUS, IPaging, BaseResponse } from 'src/helpers/helper';
 import { SlideService } from './slide.service';
 import { CreateSlidesDto } from './dto/createSlide.dto';
 import { UpdateSlidesDto } from './dto/updateSlide.dto';
 import * as _ from 'lodash';
 import { JwtGuard } from 'src/modules/auth/guards/jwt/jwt.guard';
-import { RoleGuard } from 'src/modules/auth/guards/role/role.guard';
 
 @Controller('admin/slide')
 @ApiTags('Admin Slide')
@@ -39,7 +38,6 @@ export class SlideController {
 
     @Get('show/:id')
     @HttpCode(HttpStatus.OK)
-    @UseGuards(RoleGuard)
     @ApiResponse({ status: 200, description: 'success' })
     async getSlideById(@Param('id') id: number) {
         try {

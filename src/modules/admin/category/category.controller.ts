@@ -7,7 +7,6 @@ import { UpdateCategoryDto } from './dto/updateCate.dto';
 import * as _ from 'lodash';
 import { BadRequestException } from 'src/helpers/response/badRequest';
 import { JwtGuard } from 'src/modules/auth/guards/jwt/jwt.guard';
-import { RoleGuard } from 'src/modules/auth/guards/role/role.guard';
 
 @Controller('admin/category')
 @ApiTags('Admin Category')
@@ -20,7 +19,6 @@ export class CategoryController {
 
     @Get('')
     @HttpCode(HttpStatus.OK)
-    @UseGuards(RoleGuard)
     @ApiResponse({ status: 200, description: 'success' })
     async getCategories(@Request() req: any) {
         try {
@@ -41,7 +39,6 @@ export class CategoryController {
 
     @Get('show/:id')
     @HttpCode(HttpStatus.OK)
-    @UseGuards(RoleGuard)
     @ApiResponse({ status: 200, description: 'success' })
     async getCategoryById(@Param('id') id: number) {
         try {
@@ -57,7 +54,6 @@ export class CategoryController {
 
     @Post('store')
     @HttpCode(HttpStatus.OK)
-    @UseGuards(RoleGuard)
     @ApiResponse({ status: 200, description: 'success' })
     async createCategory(@Body() createCate: CreateCategoryDto) {
         try {
@@ -80,7 +76,6 @@ export class CategoryController {
 
     @Put('update/:id')
     @HttpCode(HttpStatus.OK)
-    @UseGuards(RoleGuard)
     @ApiResponse({ status: 200, description: 'success' })
     async updateCategory(@Param('id') cateId: number, @Body() updateCate: UpdateCategoryDto) {
         try {
@@ -99,7 +94,6 @@ export class CategoryController {
 
     @Delete('delete/:id')
     @HttpCode(HttpStatus.OK)
-    @UseGuards(RoleGuard)
     @ApiResponse({ status: 200, description: 'success' })
     async deleteCategory(@Param('id') cateId: number) {
         try {
@@ -128,7 +122,6 @@ export class CategoryController {
 
     @Get('list/hot')
     @HttpCode(HttpStatus.OK)
-    @UseGuards(RoleGuard)
     @ApiResponse({ status: 200, description: 'success' })
     async getCategoriesHot(@Request() req: any) {
         try {

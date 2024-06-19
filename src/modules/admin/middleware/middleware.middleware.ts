@@ -13,7 +13,7 @@ export class MiddlewareMiddleware implements NestMiddleware {
 		try {
 			let access_token = req.headers?.authorization || null;
 			if (_.isEmpty(access_token)) {
-				throw new BadRequestException({ code: 'LG0401' });
+				throw new BadRequestException({ code: '	' });
 			}
 
 			let token = access_token.replace(/bearer\s+/i, '');

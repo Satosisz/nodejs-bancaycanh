@@ -1,10 +1,7 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards, HttpCode, HttpStatus, Request, BadRequestException, Put } from '@nestjs/common';
+import { Controller, Get, Post, Body, Param, Delete, Request, BadRequestException, Put } from '@nestjs/common';
 import { ContactService } from './contact.service';
 import { CreateContactDto } from './dto/create-contact.dto';
-import { UpdateContactDto } from './dto/update-contact.dto';
-import { ApiResponse, ApiTags } from '@nestjs/swagger';
-import { JwtGuard } from 'src/modules/auth/guards/jwt/jwt.guard';
-import { RoleGuard } from 'src/modules/auth/guards/role/role.guard';
+import { ApiTags } from '@nestjs/swagger';
 import { BaseResponse, HTTP_STATUS, IPaging } from 'src/helpers/helper';
 import * as _ from 'lodash';
 
